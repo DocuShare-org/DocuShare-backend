@@ -7,7 +7,8 @@ const cors = require('cors')
 const express = require('express');
 const userController = require('./userController')
 
-mongoose.connect("mongodb://0.0.0.0:27017/DocuShare")
+mongoose.connect(process.env.MONGO_URL)
+// mongodb://0.0.0.0:27017/DocuShare
 
 const app = express();
 app.use(express.json());
