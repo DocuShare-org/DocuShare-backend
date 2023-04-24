@@ -57,15 +57,18 @@ io.on("connection", socket => {
         .then(async(uid)=>{
             if(uid =='Unauthorized') return;
             const document = await findOrCreateDoc(documentID, uid, name)
-            socket.join(documentID)
-            socket.emit("load-document", document.data)
-            console.log(document.data)
-            socket.on("send-changes", (delta) => {
-                socket.broadcast.to(documentID).emit("receive-changes", delta)
-            })
-            socket.on("save-document", async data =>{
-                await Document.findByIdAndUpdate(documentID, {data})
-            })
+            if(document.access.includes(uid))
+            {
+                socket.join(documentID)
+                socket.emit("load-document", document.data)
+                console.log(document.data)
+                socket.on("send-changes", (delta) => {
+                    socket.broadcast.to(documentID).emit("receive-changes", delta)
+                })
+                socket.on("save-document", async data =>{
+                    await Document.findByIdAndUpdate(documentID, {data})
+                })
+            }
         })
         .catch(async(err)=>{console.log(err)})
     })
