@@ -1,20 +1,12 @@
-- name: Deploy Kubernetes services
+---
+- name: Deploying with Kubernetes
   hosts: localhost
-  become: true
   tasks:
-    - name: Apply backend deployment
-      k8s:
+    - name: create backend deployment
+      kubernetes.core.k8s:
         state: present
-        definition: ./deploy-backend.yaml
-        namespace: default
-        image: dhamodhar7/docushare-backend:latest
-      register: backend_deployment
-
-    - name: Restart backend pods if deployment changed
-      k8s_info:
-        kind: Deployment
-        namespace: default
-        name: backend
-      register: backend_info
-      changed_when: backend_info.latest_version != backend_deployment.resource_version
-      ignore_errors: yes
+        definition: "{{ lookup('file', './deploy-backend.yaml') | from_yaml }}"
+    - name: create backend service
+      kubernetes.core.k8s:
+        state: present
+        definition: "{{ lookup('file', './service-backend.yaml') | from_yaml }}" 
