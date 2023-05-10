@@ -1,5 +1,5 @@
 - name: Deploy Kubernetes services
-  hosts: kubernetes
+  hosts: localhost
   become: true
   tasks:
     - name: Apply backend deployment
