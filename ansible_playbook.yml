@@ -3,11 +3,19 @@
   hosts: localhost
   remote_user: dhamodhar
   tasks:
+    - name: create backend config map
+      kubernetes.core.k8s:
+        definition: "{{ lookup('file', './k8s-configmap-backend.yaml') | from_yaml }}"
+        state: present
+    - name: create backend secret
+      kubernetes.core.k8s:
+        definition: "{{ lookup('file', './k8s-secret-backend.yaml') | from_yaml }}"
+        state: present
     - name: create backend deployment
       kubernetes.core.k8s:
-        definition: "{{ lookup('file', './deploy-backend.yaml') | from_yaml }}"
+        definition: "{{ lookup('file', './k8s-deploy-backend.yaml') | from_yaml }}"
         state: present
     - name: create backend service
       kubernetes.core.k8s:
-        definition: "{{ lookup('file', './service-backend.yaml') | from_yaml }}" 
+        definition: "{{ lookup('file', './k8s-service-backend.yaml') | from_yaml }}" 
         state: present
