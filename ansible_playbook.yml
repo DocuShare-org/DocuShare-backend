@@ -1,6 +1,7 @@
 ---
 - name: Deploying with Kubernetes
   hosts: localhost
+  become: true
   tasks:
     - name: create backend deployment
       kubernetes.core.k8s:
