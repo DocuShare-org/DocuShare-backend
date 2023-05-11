@@ -1,7 +1,7 @@
 ---
 - name: Deploying with Kubernetes
   hosts: localhost
-  remote_user: dhamodhar
+  become: true
   tasks:
     - name: create backend deployment
       kubernetes.core.k8s:
