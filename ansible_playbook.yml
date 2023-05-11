@@ -4,9 +4,11 @@
   tasks:
     - name: create backend deployment
       kubernetes.core.k8s:
-        state: present
+        kubeconfig: '~/.kube/config'
         definition: "{{ lookup('file', './deploy-backend.yaml') | from_yaml }}"
+        state: present
     - name: create backend service
       kubernetes.core.k8s:
-        state: present
+        kubeconfig: '~/.kube/config'
         definition: "{{ lookup('file', './service-backend.yaml') | from_yaml }}" 
+        state: present
