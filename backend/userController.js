@@ -2,6 +2,7 @@ const User = require('./user');
 const Document = require('./Document');
 const jwt = require('jsonwebtoken');
 var mongoose = require('mongoose');
+const file_log = require('./log');
 
 async function register(req, res, next) {
   const { email, password, name } = req.body;
@@ -9,10 +10,12 @@ async function register(req, res, next) {
   await user.save()
     .then((obj)=>{
       console.log(obj)
+      file_log(req.method + " " + req.originalUrl + " " + id + " 200");
       res.send({ message: 'User registered successfully' });
     })
     .catch((err)=>{
       console.log(err)
+      file_log(req.method + " " + req.originalUrl + " " + id + " 400");
       res.status(400).send({ message: 'Duplicate email' });
     })
 }
