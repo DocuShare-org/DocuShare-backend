@@ -10,12 +10,12 @@ async function register(req, res, next) {
   await user.save()
     .then((obj)=>{
       console.log(obj)
-      file_log(req.method + " " + req.originalUrl + " " + id + " 200");
+      file_log(req.method + " " + req.originalUrl + " " + user._id + " 200");
       res.send({ message: 'User registered successfully' });
     })
     .catch((err)=>{
       console.log(err)
-      file_log(req.method + " " + req.originalUrl + " " + id + " 400");
+      file_log(req.method + " " + req.originalUrl + " " + "-" + " 400");
       res.status(400).send({ message: 'Duplicate email' });
     })
 }
