@@ -12,7 +12,8 @@ spec:
       protocol: TCP
       port: 3001
       targetPort: 3001
+      nodePort: 30001
     - name: api-port
       port: 3002
       targetPort: 3002
-      protocol: TCP
+      nodePort: 30002
