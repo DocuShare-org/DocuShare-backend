@@ -34,3 +34,10 @@ spec:
           containerPort: 3001
         - name: api-port
           containerPort: 3002
+        volumeMounts:
+          - name: data
+            mountpath: /app/logs/
+      volumes:
+      - name: data
+        hostPath: 
+          path: /home/docker/logs/
