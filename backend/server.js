@@ -105,7 +105,7 @@ io.on("connection", async(socket) => {
                     // const ls = await spawn("python", ["./backend/setgram.py"]);
 
                     // var stat= 0;
-                    exec("python ./backend/setgram.py", (error, stdout, stderr) => {
+                    exec("python3 ./setgram.py", (error, stdout, stderr) => {
 
         
                         if (error) {
