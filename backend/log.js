@@ -20,13 +20,12 @@ function logtofile(text, file = 'default.log', delimiter = '\n') {
 	const logText = getDateAsText() + ' ' + text + delimiter;
 	fs.appendFile(file, logText, 'utf8', function (error) {
 		if (error) {
-			console.log(getDateAsText() + ' ' + error);
-		}
+			console.log(getDateAsText() + ' ' + error);		}
 	});
 }
 
-const flog = (str) => {
-	logtofile(str, process.env.LOG_FILE_NAME || "../logs/backend.log");
+const file_log = (str) => {
+	logtofile(str, process.env.LOG_FILE_NAME || "/app/logs/backend.log");
 };
 
-module.exports = flog;
+module.exports = file_log;
