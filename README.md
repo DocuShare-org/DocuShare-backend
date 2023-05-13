@@ -3,5 +3,5 @@ DocuShare is an all-in-one document management website! This platform offers a s
 
 # Setup
 * Enter $npm install command in both frontend/ and backend/ directories
-* Run $npm start in frontend/ 
+* Run $npm start in frontend
 * Run $npm run devStart in backend
