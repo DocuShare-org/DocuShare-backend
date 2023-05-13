@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "devStart": "nodemon backend/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./backend/test/*.js --timeout 50000"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +20,9 @@
     "socket.io": "^4.6.1"
   },
   "devDependencies": {
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.2.0",
     "nodemon": "^2.0.22"
   }
 }
