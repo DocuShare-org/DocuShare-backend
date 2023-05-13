@@ -193,3 +193,5 @@ async function findOrCreateDoc(documentID,uid, name){
     if(document) return document
     return await Document.create({_id: documentID, data : defaultValue, uid : uid, name : name, access : [uid]})
 }
+
+module.exports = app
