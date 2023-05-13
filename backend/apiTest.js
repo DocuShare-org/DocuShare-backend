@@ -1,10 +1,11 @@
-
-
 let chai = require("chai");
 let route = require("./server")
 
 const Document = require("./Document")
 const User = require("./user")
+
+var passed=0;
+var failed=0;
 
 let chaiHttp = require("chai-http");
 const { deleteOne } = require("./user");
@@ -13,6 +14,7 @@ chai.should();
 
 var tken;
 var uid;
+
 var mailid;
 chai.use(chaiHttp);
 
@@ -49,7 +51,10 @@ describe('API Tests ', function(){
             .post("/register")
             .send({"email":"an@gmail.com", "password":"pawrd123", "name": "fin"})
             mailid = "an@gmail.com";
-            resp.should.have.status(200);
+            if(resp.should.have.status(200))
+            {
+                passed++;
+            }
 
             console.log(resp.body);
             // .end((err, resp) => {
@@ -78,7 +83,11 @@ describe('API Tests ', function(){
 
             console.log("resp.body is ",resp.body);
             tken = resp.body["token"];
-            resp.should.have.status(200);
+            if(resp.should.have.status(200))
+            {
+                passed++;
+            }
+
             chai.assert.notEqual(tken, null);
             
 
@@ -102,7 +111,10 @@ describe('API Tests ', function(){
             
             console.log("Response is ",resp.body);
             uid = resp.body["_id"];
-            resp.should.have.status(200);
+            if(resp.should.have.status(200))
+            {
+                passed++;
+            }
             chai.assert.equal(mailid, resp.body["email"]);
         })
     })
@@ -138,7 +150,10 @@ describe('API Tests ', function(){
             .send({ "did": "documentID1", "access_email": "abc@gmail.com" })
 
             console.log("RESP US ",resp.body);
-            resp.should.have.status(200);
+            if(resp.should.have.status(200))
+            {
+                passed++;
+            }
 
         })
     })
@@ -161,7 +176,10 @@ describe('API Tests ', function(){
 
 
             console.log("Resp received is : ", resp.body)
-            resp.should.have.status(200);
+            if(resp.should.have.status(200))
+            {
+                passed++;
+            }
 
             })
         })
@@ -183,7 +201,10 @@ describe('API Tests ', function(){
             .send({ "did": "documentID1" })
 
             console.log("Resp received is : ", resp.body)
-            resp.should.have.status(200);
+            if(resp.should.have.status(200))
+            {
+                passed++;
+            }
 
 
         })
@@ -205,8 +226,11 @@ describe('API Tests ', function(){
             .get("/get_docs")
             .set('Authorization', tken)
            console.log("Response body is ", resp.body);
-           resp.should.have.status(200);
-           console.log("i am printed first");
+           if(resp.should.have.status(200))
+           {
+               passed++;
+           }
+          console.log("i am printed first");
             
         })
     })
@@ -239,8 +263,18 @@ describe('API Tests ', function(){
         {
             console.log("User deletion failed", removeusrstat);
         }
+
+
        
-        console.log("i am printed at last - ");
+        console.log("i am printed at last - ",passed);
+
+        if(passed == 7)
+        {process.exit();}
+        else
+        {
+            throw new Error("Script execution ended due to an error");
+        }
 
     })
+
 })
