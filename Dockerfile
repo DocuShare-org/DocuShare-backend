@@ -15,7 +15,7 @@ RUN apt-get update && \
 COPY package*.json ./
 
 # Install Node.js dependencies
-RUN npm install
+RUN npm ci
 
 # Copy the requirements.txt file for Python
 # Install Python dependencies
