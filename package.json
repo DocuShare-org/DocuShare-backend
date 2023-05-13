@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "devStart": "nodemon backend/server.js",
-    "test": "mocha ./backend/test/*.js --timeout 50000"
+    "test": "mocha ./backend/apiTest.js --timeout 50000"
   },
   "author": "",
   "license": "ISC",
