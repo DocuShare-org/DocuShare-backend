@@ -1,13 +1,13 @@
 
 
 let chai = require("chai");
-let route = require("./../server")
+let route = require("./server")
 
-const Document = require("./../Document")
-const User = require("./../user")
+const Document = require("./Document")
+const User = require("./user")
 
 let chaiHttp = require("chai-http");
-const { deleteOne } = require("../user");
+const { deleteOne } = require("./user");
 
 chai.should();
 
